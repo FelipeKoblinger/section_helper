@@ -25,7 +25,7 @@ Or install it yourself as:
 The usage is simple, in view do (Slim example):
 
 ```ruby
-= sector_information('Name', icon: 'fa fa-user') do
+= section_for('Customer Information', icon: 'fa fa-user') do
     - t.table do
         - t.column 'Customer', @customer.name, icon: 'fa fa-user'
         - t.column 'Age', @customer.age
@@ -38,7 +38,7 @@ This piece of code will generate:
         <div class="panel-heading">
             <h3 class="panel-title">
                 <i class="fa fa-user fa-right-space"></i>
-                Cliente
+                Customer Information 
             </h3>
         </div>
         <div class="panel-body">
@@ -48,7 +48,7 @@ This piece of code will generate:
                         <tr>
                             <th>
                                 <i class="fa fa-user fa-right-space"></i>
-                                Name
+                               Customer 
                             </th>
                             <th>
                                 Age 
