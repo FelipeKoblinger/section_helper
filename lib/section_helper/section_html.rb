@@ -40,34 +40,36 @@ module SectionHelper
     end
 
     def table_html(collection, slices)
-      concat content_tag(:div, class: 'table-responsive') {
-               concat content_tag(:table, class: 'table table-striped table-bordered table-hover') {
-                        # Header
-                        concat content_tag(:thead) {
-                                 concat content_tag(:tr) {
-                                          collection[0..(slices-1)].each do |column|
-                                            icon = column[:options].key?(:icon) ? column[:options].delete(:icon) : ''
-                                            concat content_tag(:th) {
-                                                     concat(content_tag(:i, '', class: "#{icon} fa-right-space"))
-                                                     concat(column[:header])
-                                                   }
-                                          end
-                                        }
-                               }
-
-                        # Body
-                        concat content_tag(:tbody) {
-                                   collection.each_slice(slices) do |columns|
+      unless collection.empty?
+        concat content_tag(:div, class: 'table-responsive') {
+                 concat content_tag(:table, class: 'table table-striped table-bordered table-hover') {
+                          # Header
+                          concat content_tag(:thead) {
                                    concat content_tag(:tr) {
-                                            columns.each do |column|
-                                              concat content_tag(:td, column[:information])
+                                            collection[0..(slices-1)].each do |column|
+                                              icon = column[:options].key?(:icon) ? column[:options].delete(:icon) : ''
+                                              concat content_tag(:th) {
+                                                       concat(content_tag(:i, '', class: "#{icon} fa-right-space"))
+                                                       concat(column[:header])
+                                                     }
                                             end
                                           }
-                                   end
-                               }
+                                 }
 
-                      }
-             }
+                          # Body
+                          concat content_tag(:tbody) {
+                                     collection.each_slice(slices) do |columns|
+                                     concat content_tag(:tr) {
+                                              columns.each do |column|
+                                                concat content_tag(:td, column[:information])
+                                              end
+                                            }
+                                     end
+                                 }
+
+                        }
+               }
+        end
     end
 
     def html
